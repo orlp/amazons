@@ -1,0 +1,192 @@
+:root {
+  --board-white: #f0d9b5;
+  --board-black: #b58863;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
+    background-color: #edebe9;
+}
+
+
+#game-area {
+    margin-top: 5vmin;
+    display: grid;
+    grid-template-columns: minmax(20px, auto) 75vmin 200px minmax(20px, auto);
+    grid-template-rows: 75vmin;
+    grid-template-areas: '. board controls .';
+}
+
+#main-controls {
+    grid-area: controls;
+    margin-left: 20px;
+}
+
+/* Grid */
+.amazons-board {
+    grid-area: board;
+    width: 100%;
+    height: 100%;
+    /* margin: 0 auto; */
+    position: relative;
+}
+
+.amazons-board .grid {
+    display: grid;
+    grid-template-columns: repeat(var(--n), 1fr);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),
+                0 3px 1px -2px rgba(0,0,0,0.2),
+                0 1px 5px 0 rgba(0,0,0,0.12);
+    width: 100%;
+    height: 100%;
+    background-color: var(--board-white);
+}
+
+
+.amazons-board .field {
+    position: relative;
+}
+
+.amazons-board .field.whitechecker {
+    background-color: var(--board-white);
+}
+
+.amazons-board .field.blackchecker {
+    background-color: var(--board-black);
+}
+
+.amazons-board .field.move-dest {
+    cursor: pointer;
+}
+
+.amazons-board .field.last-move:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: rgba(155,199,0,0.41)
+}
+
+.amazons-board .field.move-dest:after {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: radial-gradient(rgba(20,85,30,0.5) 19%, rgba(0,0,0,0) 20%);
+}
+
+.amazons-board .field.move-dest:hover:after {
+    background: rgba(20,85,30,0.3);
+}
+
+
+/* Coordinates. */
+.amazons-board .coord {
+    user-select: none; 
+    pointer-events: none;
+
+    position: absolute;
+    padding: 7%;
+
+    font-size: 0.8em;
+    font-weight: bold;
+    line-height: normal;
+}
+
+.amazons-board .coord.rank {
+    text-align: right;
+    width: 100%;
+}
+
+.amazons-board .coord.file {
+    bottom: 0;
+}
+
+.amazons-board .whitechecker .coord {
+    color: var(--board-black);
+}
+.amazons-board .blackchecker .coord {
+    color: var(--board-white);
+}
+
+/* Pieces. */
+.amazons-board .amazon {
+    background-size: cover;
+    width: calc(100% / var(--n));
+    height: calc(100% / var(--n));
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    transition: 0.5s ease-in-out;
+    transform: translate(calc(100% * var(--col)), calc(100% * var(--row)));
+}
+.amazons-board .white.amazon {
+    background-image: url('../images/cburnett/white-queen.svg');
+}
+.amazons-board .black.amazon {
+    background-image: url('../images/cburnett/black-queen.svg');
+}
+
+.amazons-board.white-turn .white.amazon {
+    cursor: pointer;
+}
+
+.amazons-board.black-turn .black.amazon {
+    cursor: pointer;
+}
+
+.amazons-board .arrow {
+    background-size: cover;
+    width: calc(100% / var(--n));
+    height: calc(100% / var(--n));
+    position: absolute;
+    top: 0;
+    left: 0;
+    will-change: transform;
+    transition: 0.5s ease-in-out;
+    transform: translate(calc(100% * var(--col)), calc(100% * var(--row)));
+    background-image: url('../images/cburnett/black-circle.svg');
+}
+
+/*
+.amazons-board .arrow.white {
+    background-image: url('../images/cburnett/white-circle.svg');
+}
+*/
+
+
+
+
+/* Calc attributes. */
+[data-row="0"] { --row: 0; }
+[data-row="1"] { --row: 1; }
+[data-row="2"] { --row: 2; }
+[data-row="3"] { --row: 3; }
+[data-row="4"] { --row: 4; }
+[data-row="5"] { --row: 5; }
+[data-row="6"] { --row: 6; }
+[data-row="7"] { --row: 7; }
+[data-row="8"] { --row: 8; }
+[data-row="9"] { --row: 9; }
+[data-col="0"] { --col: 0; }
+[data-col="1"] { --col: 1; }
+[data-col="2"] { --col: 2; }
+[data-col="3"] { --col: 3; }
+[data-col="4"] { --col: 4; }
+[data-col="5"] { --col: 5; }
+[data-col="6"] { --col: 6; }
+[data-col="7"] { --col: 7; }
+[data-col="8"] { --col: 8; }
+[data-col="9"] { --col: 9; }
+[data-n="0"] { --n: 0; }
+[data-n="1"] { --n: 1; }
+[data-n="2"] { --n: 2; }
+[data-n="3"] { --n: 3; }
+[data-n="4"] { --n: 4; }
+[data-n="5"] { --n: 5; }
+[data-n="6"] { --n: 6; }
+[data-n="7"] { --n: 7; }
+[data-n="8"] { --n: 8; }
+[data-n="9"] { --n: 9; }
+[data-n="10"] { --n: 10; }
